@@ -252,8 +252,10 @@ file run the following commands:
 <div data-lang="scala" markdown="1">
 <pre class="prettyprint lang-bsh">
 cd /root/machine-learning/scala
+sbt/sbt package assembly
+# MASTER should be the URL for the spark master on the cluster, e.g. spark://ec2-54-213-170-164.us-west-2.compute.amazonaws.com:7077
 # change the folder name from "medium" to "large" to run on the large data set
-sbt/sbt package "run /movielens/medium"
+/root/spark/bin/spark-submit --master MASTER --class MovieLensALS target/scala-2.10/movielens-als-assembly-0.0.jar /movielens/medium
 </pre>
 
 This command will compile the `MovieLensALS` class and create a JAR file in
